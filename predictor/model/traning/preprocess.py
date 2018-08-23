@@ -85,6 +85,18 @@ class DataProcessor:
         new_df = pd.DataFrame(months_oh, columns=months)
         result_df = pd.concat([result_df, new_df], axis=1)
 
+        result_df.drop(['customer_id', 'occupation_enc', 'occupation', 'month'], inplace=True, axis=1)
+
         self.data = result_df
 
         return result_df
+
+    def normalize(self):
+        data = np.array(self.data)
+
+        non_cate = data[:, [0, 1, 2]]
+        non_cate = preprocessing.normalize(non_cate, axis=0)
+
+        normalized_data = np.concatenate((non_cate, data[:, [col for col in range(3, 22)]]), axis=1)
+
+        return normalized_data
