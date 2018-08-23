@@ -9,6 +9,7 @@ class DataProcessor:
     def __init__(self):
         self.raw_data = None
         self.data = None
+        self.np_data = None
 
     def download(self, url, token=None, token_type='Bearer'):
         response = requests.get(url=url,
@@ -99,4 +100,4 @@ class DataProcessor:
 
         normalized_data = np.concatenate((non_cate, data[:, [col for col in range(3, 22)]]), axis=1)
 
-        return normalized_data
+        self.np_data = normalized_data
