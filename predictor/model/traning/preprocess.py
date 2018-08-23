@@ -21,7 +21,7 @@ class DataProcessor:
                     file.write(chunk)
 
         self.raw_data = pd.read_csv('raw_dataset.csv')
-        df = pd.read_csv('raw_dataset.csv')
+        df = pd.DataFrame(self.raw_data)
 
         df['month'] = df['transfer_time'].map(lambda time: int(time.split('-')[1]))
         df['year'] = df['transfer_time'].map(lambda time: int(time.split('-')[0]))
